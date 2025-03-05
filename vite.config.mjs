@@ -1,9 +1,15 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'node:path'
 import autoprefixer from 'autoprefixer'
+import dotenv from 'dotenv'
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  // Load environment variables from .env file
+  const env = loadEnv(mode, process.cwd(), '')
+
+  dotenv.config() // Ensure dotenv is loaded
+
   return {
     plugins: [vue()],
     base: './',
@@ -16,7 +22,6 @@ export default defineConfig(() => {
     },
     resolve: {
       alias: [
-        // webpack path resolve to vitejs
         {
           find: /^~(.*)$/,
           replacement: '$1',
@@ -34,9 +39,10 @@ export default defineConfig(() => {
     },
     server: {
       port: 3000,
-      proxy: {
-        // https://vitejs.dev/config/server-options.html
-      },
+      proxy: {},
+    },
+    define: {
+      'process.env': env, // Ensure environment variables are accessible
     },
   }
 })
