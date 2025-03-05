@@ -48,7 +48,7 @@
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                    aliqua t.
                   </p>
                   <CButton color="light" variant="outline" class="mt-3">
                     Register Now!
